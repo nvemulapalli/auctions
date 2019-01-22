@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html ng-app="auctionsclient">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Auctions</title>
+<link rel="stylesheet" type="text/css" href="css/styles.css">
+<script src="lib/angular.min.js"></script>
+<script src="js/app.js"></script>
+<script src="js/services.js"></script>
+<script src="js/controllers.js"></script>
+</head>
+<body>
+	<h1 align="center">
+		Welcome! <br /> What would you like to do today?
+	</h1>
+	<div align="center" ng-controller="AuctionsCtrl">
+		<button ng-click="getAuctions()">View all Auctions</button>
+		<button ng-click="showFindAuctionElement()">Find Auction</button>
+		<button ng-click="showCreateAuctionElement()">Create Auction</button>
+		<button ng-click="showCreateBidElement()">Create Bid</button>
+		<button ng-click="showAuditLogBidElement()">View Bid Audit Log</button>
+		<br /> <br />
+		
+		<a style="color:red;" ng-show='errorMessage'>Failed due to: {{errorMessage}}</a>
+		
+		<div ng-show="showAuctions">
+			<br/><br/>
+			<a style="color:red;" ng-show='message'>{{message}}</a>
+			<table>
+				<tr>
+					<th>Auction Item Id</th>
+					<th>Reserve Price</th>
+					<th>Item Id</th>
+					<th>Description</th>
+					<th>Current Bid Amount</th>
+				</tr>
+
+				<tr ng-repeat="auction in auctionItems">
+					<td>{{auction.auctionItemId}}</td>
+					<td>{{auction.reservePrice}}</td>
+					<td>{{auction.item.itemId}}</td>
+					<td>{{auction.item.description}}</td>
+					<td>{{auction.currentBid}}</td>
+				</tr>
+
+			</table>
+		</div>
+		
+		<div ng-show="showFindAuction">
+			<br/><br/>
+			<a style="color:red;" ng-show='message'>{{message}}</a><br/>
+			<input type="text" ng-model="auctionItemIdToFind" placeholder='Enter auction item id...'> <button class="button button-small" ng-click="findAuction()">Find</button>
+			<br/><br/>
+			<table ng-show="auctionItem">
+				<tr>
+					<th>Auction Item Id</th>
+					<th>Reserve Price</th>
+					<th>Item Id</th>
+					<th>Description</th>
+					<th>Current Bid Amount</th>
+				</tr>
+
+				<tr>
+					<td>{{auctionItem.auctionItemId}}</td>
+					<td>{{auctionItem.reservePrice}}</td>
+					<td>{{auctionItem.item.itemId}}</td>
+					<td>{{auctionItem.item.description}}</td>
+					<td>{{auctionItem.currentBid}}</td>
+				</tr>
+			</table>
+		</div>
+		
+		<div ng-show="showCreateAuction">
+			<br/>
+			<a style="color:red;" ng-show='message'>{{message}}</a>
+			<br />
+			<input type="text" ng-model="reservePriceToCreate" placeholder='Enter reserve price...'><br />
+			<input type="text" ng-model="itemIdToCreate" placeholder='Enter item id...'><br />
+			<input type="text" ng-model="descriptionToCreate" placeholder='Enter description for the item...'><br />
+			
+			<button class="button button-small" ng-click="createAuction()">Create</button>
+			<br/>
+			<a ng-show='auctionItemId'>Successfully created an auction with auction item id: {{auctionItemId}}</a>
+		</div>
+		
+		<div ng-show="showCreateBid">
+			<br/>
+			<a style="color:red;" ng-show='message'>{{message}}</a>
+			<a ng-show='bidId'>Successfully created a bid with bid id: {{bidId}}</a>
+			<br />
+			<input type="text" ng-model="bidAuctionItemIdToCreate" placeholder='Enter auction item id...'><br />
+			<input type="text" ng-model="maxAutoBidAmountToCreate" placeholder='Enter max bid amount...'><br />
+			<input type="text" ng-model="bidderNameToCreate" placeholder='Enter Bidder name...'><br />
+			
+			<button class="button button-small" ng-click="createBid()">Create</button>
+			<br/>
+		</div>
+		
+		<div ng-show="showAuditLogBid">
+			<br/><br/>
+			<a style="color:red;" ng-show='message'>{{message}}</a><br/>
+			<input type="text" ng-model="auctionItemIdForBids" placeholder='Enter auction item id...'> <button class="button button-small" ng-click="getBids()">View Audit Log</button>
+			<br/><br/>
+			<table ng-show="bids">
+				<tr>
+					<th>Bid Id</th>
+					<th>Auction Item Id</th>
+					<th>Max Auto Bid Amount</th>
+					<th>Bidder Name</th>
+				</tr>
+
+				<tr ng-repeat="bid in bids">
+					<td>{{bid.bidId}}</td>
+					<td>{{bid.auctionItemId}}</td>
+					<td>{{bid.maxAutoBidAmount}}</td>
+					<td>{{bid.bidderName}}</td>
+				</tr>
+			</table>
+		</div>
+		
+	</div>
+</body>
+</html>
