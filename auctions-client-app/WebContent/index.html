@@ -73,6 +73,7 @@
 		<div ng-show="showCreateAuction">
 			<br/>
 			<a style="color:red;" ng-show='message'>{{message}}</a>
+			<a style="color:green;" ng-show='auctionItemId'>Successfully created an auction with auction item id: {{auctionItemId}}</a>
 			<br />
 			<input type="text" ng-model="reservePriceToCreate" placeholder='Enter reserve price...'><br />
 			<input type="text" ng-model="itemIdToCreate" placeholder='Enter item id...'><br />
@@ -80,13 +81,12 @@
 			
 			<button class="button button-small" ng-click="createAuction()">Create</button>
 			<br/>
-			<a ng-show='auctionItemId'>Successfully created an auction with auction item id: {{auctionItemId}}</a>
 		</div>
 		
 		<div ng-show="showCreateBid">
 			<br/>
 			<a style="color:red;" ng-show='message'>{{message}}</a>
-			<a ng-show='bidId'>Successfully created a bid with bid id: {{bidId}}</a>
+			<a style="color:green;" ng-show='bidId'>Successfully created a bid with bid id: {{bidId}}</a>
 			<br />
 			<input type="text" ng-model="bidAuctionItemIdToCreate" placeholder='Enter auction item id...'><br />
 			<input type="text" ng-model="maxAutoBidAmountToCreate" placeholder='Enter max bid amount...'><br />

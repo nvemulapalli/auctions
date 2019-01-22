@@ -66,7 +66,7 @@ public class BidsServiceImpl implements IBidsService {
 			}
 			
 			responseResult.setResultMessage("The bid amount didn't meet the reserve price.");
-		} else if(currentBid != null && currentBid.getMaxAutoBidAmount().compareTo(maxBidAmount)==1) {
+		} else if(currentBid != null && currentBid.getMaxAutoBidAmount().compareTo(maxBidAmount)>=0) {
 			//current bid is more than the max bid amount. Notify the bidder has been outbid.
 			return Utils.generateErrorResponse("The current bid amount is equal or higher than the bid amount requested.");
 		}
