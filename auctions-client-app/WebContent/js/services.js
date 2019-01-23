@@ -1,6 +1,6 @@
 app.service('AuctionServices', [ '$http', function($http) {
 	 
-	var baseURL = 'http://localhost:8080/auctions/';
+	var baseURL = 'https://localhost:8443/auctions/';
 	
     this.getAuctions = function getAuctions() {
         return $http({
